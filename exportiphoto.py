@@ -371,7 +371,10 @@ end tell
                 return
 
         if not self.test:
-            shutil.copy2(mFilePath, tFilePath)
+            try:
+                shutil.copy2(mFilePath, tFilePath)
+            except IOError as e:
+                print "IOError:{0}".format(e)
         md_written = False
         if self.use_metadata:
             md_written = self.writePhotoMD(imageId, tFilePath)
